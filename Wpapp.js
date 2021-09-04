@@ -3,6 +3,8 @@
 const express = require("express");
 const https = require("https");
 
+require('dotenv').config();
+
 const app= express();
 
 app.use(express.json());
@@ -19,7 +21,7 @@ app.post("/", function(req, res){
     console.log("Post request received");
 
     const query = req.body.PlaceName;
-    const appid = "53f5c634d9174b24fdc2b36b2376148f";
+    const appid = process.env.APP_ID;
     const unit = "metric";
     const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + appid + "&units=" + unit;
     https.get(url, function(response){
